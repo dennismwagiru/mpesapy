@@ -21,6 +21,19 @@ class Mpesa:
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
 
+    def c2b_simulate(self, **kwargs):
+        expected_keys = ['CommandID', 'Amount', 'Msisdn', 'BillRefNumber']
+        payload = self.process_kwargs(expected_keys, kwargs)
+        payload['ShortCode'] = self.short_code
+        url = URL['sandbox']['c2bsimulate']
+        access_token = self.get_access_token()
+        headers = {
+            'Authorization': 'Bearer ' + access_token
+        }
+
+        res = requests.post(url=url, json=payload, headers=headers).text
+        return json.loads(res)
+
     def c2b_register_url(self, **kwargs):
         expected_keys = ['ValidationURL', 'ConfirmationURL']
         payload = self.process_kwargs(expected_keys, kwargs)
