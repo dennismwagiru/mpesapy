@@ -13,13 +13,43 @@ This is a wrapper for Mpesa daraja api
 Work in progress
 
 """
-class mpesapy:
+class Mpesa:
 
     def __init__(self, env, short_code, consumer_key, consumer_secret):
         self.env = env
         self.short_code = short_code
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
+
+    def c2b_register_url(self, **kwargs):
+        expected_keys = ['ValidationURL', 'ConfirmationURL']
+        payload = self.process_kwargs(expected_keys, kwargs)
+        payload['ResponseType'] = 'Completed'
+        payload['ShortCode'] = self.short_code
+        url = URL['sandbox']['registerurl']
+        access_token = self.get_access_token()
+        headers = {
+            'Authorization': 'Bearer ' + access_token
+        }
+        res = requests.post(url=url, json=payload, headers=headers).text
+        return json.loads(res)
+
+    def lipa_na_mpesa_online(self, **kwargs):
+        expected_keys = ['Password', 'Timestamp', 'Amount', 'PartyA', 'PartyB', 'PhoneNumber', 'CallBackURL',
+                         'AccountReference', 'TransactionDesc']
+        payload = self.process_kwargs(expected_keys, kwargs)
+        string = self.short_code + payload['Password'] + payload['Timestamp']
+        key = base64.b64encode((string).encode("utf-8")).decode("ascii").replace('\n', '')
+        payload['Password'] = key
+        payload['BusinessShortCode'] = self.short_code
+        payload['TransactionType'] = 'CustomerPayBillOnline'
+        url = URL[self.env]['online_checkout']
+        access_token = self.get_access_token()
+        headers = {
+            'Authorization': 'Bearer ' + access_token
+        }
+        res = requests.post(url=url, json=payload, headers=headers).text
+        return json.loads(res)
 
     @staticmethod
     def process_kwargs(expected_keys, kwargs):
@@ -43,21 +73,3 @@ class mpesapy:
         if 'errorMessage' in res_json:
             raise ValueError(res_json['errorMessage'])
         return res_json['access_token']
-
-    def lipa_na_mpesa_online(self, **kwargs):
-        expected_keys = ["Password", "Timestamp",
-                         "Amount", "PartyA", "PartyB", "PhoneNumber",
-                         "CallBackURL", "AccountReference", "TransactionDesc"]
-        payload = self.process_kwargs(expected_keys, kwargs)
-        string = self.short_code + payload['Password'] + payload['Timestamp']
-        key = base64.b64encode((string).encode("utf-8")).decode("ascii").replace('\n', '')
-        payload['Password'] = key
-        payload['BusinessShortCode'] = self.short_code
-        payload['TransactionType'] = 'CustomerPayBillOnline'
-        url = URL[self.env]['online_checkout']
-        access_token = self.get_access_token()
-        headers = {
-            'Authorization': 'Bearer ' + access_token
-        }
-        res = requests.post(url=url, json=payload, headers=headers).text
-        return json.loads(res)
