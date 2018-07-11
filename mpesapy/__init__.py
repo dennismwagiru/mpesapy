@@ -21,6 +21,18 @@ class Mpesa:
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
 
+    def balance(self, **kwargs):
+        expected_keys = ['CommandID', 'PartyA', 'IdentifierType', 'Remarks', 'Initiator', 'SecurityCredential',
+                         'QueueTimeOutURL', 'ResultURL']
+        payload = self.process_kwargs(expected_keys, kwargs)
+        url = URL['sandbox']['balance']
+        access_token = self.get_access_token()
+        headers = {
+            'Authorization': 'Bearer ' + access_token
+        }
+        res = requests.post(url=url, json=payload, headers=headers).text
+        return json.loads(res)
+
     def b2b_payment_request(self, **kwargs):
         expected_keys = ['CommandID', 'Amount', 'PartyA', 'SenderIdentifier', 'PartyB', 'RecieverIdentifierType',
                          'Remarks', 'Initiator', 'SecurityCredential', 'QueueTimeOutURL', 'ResultURL',
