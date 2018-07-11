@@ -8,3 +8,4 @@ URL['sandbox']['online_checkout'] = "https://sandbox.safaricom.co.ke/mpesa/stkpu
 URL['sandbox']['register_url'] = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
 URL['sandbox']['c2b_simulate'] = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate"
 URL['sandbox']['b2c_payment_request'] = "https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest"
+URL['sandbox']['b2b_payment_request'] = "https://sandbox.safaricom.co.ke/mpesa/b2b/v1/paymentrequest"
