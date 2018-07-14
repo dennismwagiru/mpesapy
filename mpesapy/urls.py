@@ -10,3 +10,4 @@ URL['sandbox']['c2b_simulate'] = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/s
 URL['sandbox']['b2c_payment_request'] = "https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest"
 URL['sandbox']['b2b_payment_request'] = "https://sandbox.safaricom.co.ke/mpesa/b2b/v1/paymentrequest"
 URL['sandbox']['balance'] = "https://sandbox.safaricom.co.ke/mpesa/accountbalance/v1/query"
+URL['sandbox']['transaction_status'] = "https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query"
