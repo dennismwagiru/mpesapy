@@ -149,17 +149,16 @@ class Mpesa:
 
     def get_url(self, api):
         urls = {
-            'sandbox' : {
-                'authentication': 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
-                'online_checkout': 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-                'register_url': 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl',
-                'c2b_simulate': 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate',
-                'b2c_payment_request': 'https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest',
-                'b2b_payment_request': 'https://sandbox.safaricom.co.ke/mpesa/b2b/v1/paymentrequest',
-                'account_balance': 'https://sandbox.safaricom.co.ke/mpesa/accountbalance/v1/query',
-                'transaction_status': 'https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query',
-                'reversal': 'https://sandbox.safaricom.co.ke/mpesa/reversal/v1/request'
-            }
+            'authentication': 'https://{}.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'.format(self.env),
+            'online_checkout': 'https://{}.safaricom.co.ke/mpesa/stkpush/v1/processrequest'.format(self.env),
+            'register_url': 'https://{}.safaricom.co.ke/mpesa/c2b/v1/registerurl'.format(self.env),
+            'c2b_simulate': 'https://{}.safaricom.co.ke/mpesa/c2b/v1/simulate'.format(self.env),
+            'b2c_payment_request': 'https://{}.safaricom.co.ke/mpesa/b2c/v1/paymentrequest'.format(self.env),
+            'b2b_payment_request': 'https://{}.safaricom.co.ke/mpesa/b2b/v1/paymentrequest'.format(self.env),
+            'account_balance': 'https://{}.safaricom.co.ke/mpesa/accountbalance/v1/query'.format(self.env),
+            'transaction_status': 'https://{}.safaricom.co.ke/mpesa/transactionstatus/v1/query'.format(self.env),
+            'reversal': 'https://{}.safaricom.co.ke/mpesa/reversal/v1/request'.format(self.env)
+
         }
 
-        return urls[self.env][api]
+        return urls[api]
