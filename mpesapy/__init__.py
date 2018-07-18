@@ -158,7 +158,6 @@ class Mpesa:
             'account_balance': 'https://{}.safaricom.co.ke/mpesa/accountbalance/v1/query'.format(self.env),
             'transaction_status': 'https://{}.safaricom.co.ke/mpesa/transactionstatus/v1/query'.format(self.env),
             'reversal': 'https://{}.safaricom.co.ke/mpesa/reversal/v1/request'.format(self.env)
-
         }
 
         return urls[api]
