@@ -11,6 +11,8 @@ The wrapper implements the following endpoints:
 >7. Transaction Status
 >8. Reversal
 
+### Getting Started
+
 ###Prerequisites
 1. <a href="https://developer.safaricom.co.ke/user/me/apps">Click here </a> and create your app on the Mpesa daraja portal.
 2. Once that is done, you will be provided with a `Consumer Key` and a `Consumer Secret`
