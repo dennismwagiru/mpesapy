@@ -21,7 +21,7 @@ Getting Started
 3. For development and testing environment use `sandbox` for env
 4. For live environment use `api` for env
 
-####Installation:
+#### Installation:
 
     pip install git+https://github.com/dennismwagiru/mpesapy.git
 
