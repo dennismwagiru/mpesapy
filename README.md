@@ -12,3 +12,25 @@ The wrapper implements the following endpoints:
 >8. Reversal
 
 ### Getting Started
+
+####Prerequisites
+1. <a href="https://developer.safaricom.co.ke/user/me/apps">Click here </a> and create your app on the Mpesa daraja portal.
+2. Once that is done, you will be provided with a `Consumer Key` and a `Consumer Secret`
+3. For development and testing environment use `sandbox` for env
+4. For live environment use `api` for env
+####Installation
+>  pip install git+https://github.com/dennismwagiru/mpesapy.git
+
+####Usage
+Import Mpesa and create object
+
+`from mpesapy import Mpesa`
+
+`mpesa = Mpesa(env, short_code, Consumer Key, Consumer Secret)`
+
+#####Generate Access Token
+`access_token = mpesa.get_access_token()`
+
+#####Lipa Na M-Pesa Online Payment API
+``json = mpesa.lipa_na_mpesa_online(BusinessShortCode=short_code, Password=password, Timestamp=timestamp, Amount=amount, PartyA=partyA, PartyB=partyB, PhoneNumber=phone_number, CallBackURL=call_back_url, AccountReference=acc_ref, TransactionDesc=trans_desc)``
+
