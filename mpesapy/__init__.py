@@ -44,9 +44,10 @@ class Mpesa:
         return json.loads(res)
 
     def balance(self, **kwargs):
-        expected_keys = ['CommandID', 'PartyA', 'IdentifierType', 'Remarks', 'Initiator', 'SecurityCredential',
+        expected_keys = ['PartyA', 'IdentifierType', 'Remarks', 'Initiator', 'SecurityCredential',
                          'QueueTimeOutURL', 'ResultURL']
         payload = self.process_kwargs(expected_keys, kwargs)
+        payload['CommandID']='AccountBalance'
         url = self.get_url('account_balance')
         access_token = self.get_access_token()
         headers = {
@@ -56,10 +57,13 @@ class Mpesa:
         return json.loads(res)
 
     def b2b_payment_request(self, **kwargs):
-        expected_keys = ['CommandID', 'Amount', 'PartyA', 'SenderIdentifier', 'PartyB', 'RecieverIdentifierType',
+        expected_keys = ['Amount', 'PartyB', 'RecieverIdentifierType',
                          'Remarks', 'Initiator', 'SecurityCredential', 'QueueTimeOutURL', 'ResultURL',
                          'AccountReference']
         payload = self.process_kwargs(expected_keys, kwargs)
+        payload['CommandID'] ='BusinessPayBill'
+        payload['SenderIdentifier'] = 4
+        payload['PartyA'] = self.short_code
         url = self.get_url('b2b_payment_request')
         access_token = self.get_access_token()
         headers = {
@@ -69,9 +73,11 @@ class Mpesa:
         return json.loads(res)
 
     def b2c_payment_request(self, **kwargs):
-        expected_keys = ['InitiatorName', 'SecurityCredential', 'CommandID', 'Amount', 'PartyA', 'PartyB', 'Remarks',
+        expected_keys = ['InitiatorName', 'SecurityCredential', 'Amount', 'PartyB', 'Remarks',
                          'QueueTimeOutURL', 'ResultURL', 'Occassion']
         payload = self.process_kwargs(expected_keys, kwargs)
+        payload['CommandID'] = 'BusinessPayment'
+        payload['PartyA'] = self.short_code
         url = self.get_url('b2c_payment_request')
         access_token = self.get_access_token()
         headers = {
@@ -82,9 +88,10 @@ class Mpesa:
 
 
     def c2b_simulate(self, **kwargs):
-        expected_keys = ['CommandID', 'Amount', 'Msisdn', 'BillRefNumber']
+        expected_keys = ['Amount', 'MSISDN', 'BillRefNumber']
         payload = self.process_kwargs(expected_keys, kwargs)
         payload['ShortCode'] = self.short_code
+        payload['CommandID'] = 'CustomerPayBillOnline'
         url = self.get_url('c2b_simulate')
         access_token = self.get_access_token()
         headers = {

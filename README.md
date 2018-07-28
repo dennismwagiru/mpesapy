@@ -40,28 +40,49 @@ access_token = mpesa.get_access_token()
 
 ##### Lipa Na M-Pesa Online Payment API
 ```python
-res_json = mpesa.lipa_na_mpesa_online(Password='bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919', Timestamp='20180704203000',
-                                      Amount='10', PartyA='254708374149', PartyB='174379', PhoneNumber='254708374149',
-                                      CallBackURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', AccountReference='Test', TransactionDesc='Test')
+res_json = mpesa.lipa_na_mpesa_online(Password='bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919', 
+                                      Timestamp='20180704203000', Amount='10', PartyA='254708374149', PartyB='174379', 
+                                      PhoneNumber='254708374149', 
+                                      CallBackURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', 
+                                      AccountReference='Test', TransactionDesc='Test')
 ```
 
 ##### C2B API
 Register urls:
+```python
+res_json = mpesa.c2b_register_url(ValidationURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', 
+                                  ConfirmationURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU')
 
-        res_json = mpesa.c2b_register_url(ValidationURL=validation_url, ConfirmationURL=confirmation_url)
+```
+
 Simulate Transaction:
+```python
+res_json = mpesa.c2b_simulate(Amount=amount, MSISDN=phone_no, BillRefNumber=account_no)
 
-        res_json = mpesa.c2b_simulate(CommandID='CustomerPayBillOnline', Amount=amount, MSISDN=phone_no, BillRefNumber=account_no)
+```
 
 ##### B2C Payment Request
-    res_json = mpesa.b2c_payment_request(InitiatorName=initiator_name, SecurityCredential=security_credential, CommandID='BusinessPayment', Amount=amount, PartyA=short_code, PartyB=partyB, Remarks=remarks, QueueTimeOutURL=timeout_url, ResultURL=result_url, Occassion=ocassion)
-
+```python
+res_json = mpesa.b2c_payment_request(InitiatorName='testapi', Amount=10, PartyB='254708374149', Remarks='Test', 
+                                     SecurityCredential='nR47eKS3OWCwOGJofwW4Vze5Y2r9VtiNF+YrxopbnxjRckpZHDp379XscBqPLibV6ZKhQ0OjUFRTR7cVnxLrhF4PDZr8Eg4+euuYL/HB9DQHom0kuDwvxUS+ctQsRZ8gBB8d+QYBqb1hzsBuxl2jNohQpeqVOZ1tb1UzGPnLQfAcQuf/x6q5Ze0orzvC2BmCw75GhJl4quZEG2Pou72PQD2IAiQSUOWYSHcJC/3oyYqtLx6Vl98F9Qjx+6oKZHXqokkWccf2vOyl6ApQ5BKubfUPVSa9ggl87ZdffNueifs60HAIHKtD77NyV4G3vXfKBxbm5Z9AqVLbPp6yXS9AAw==',
+                                     QueueTimeOutURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', 
+                                     ResultURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', Occassion='Test')
+```
 ##### B2B Payment Request
-    res_json = mpesa.b2b_payment_request(CommandID='BusinessPayBill', Amount=amount, PartyA=partyA, SenderIdentifier=4, PartyB=short_code, RecieverIdentifierType=4, Remarks=remarks, Initiator=initiator, SecurityCredential=security_credential, QueueTimeOutURL=timeout_url, ResultURL=result_url, AccountReference=acc_ref)
-
+```python
+res_json = mpesa.b2b_payment_request(Amount=10, PartyB='600000', RecieverIdentifierType=4, Remarks='Okay', 
+                                     Initiator='testapi',
+                                     SecurityCredential='nR47eKS3OWCwOGJofwW4Vze5Y2r9VtiNF+YrxopbnxjRckpZHDp379XscBqPLibV6ZKhQ0OjUFRTR7cVnxLrhF4PDZr8Eg4+euuYL/HB9DQHom0kuDwvxUS+ctQsRZ8gBB8d+QYBqb1hzsBuxl2jNohQpeqVOZ1tb1UzGPnLQfAcQuf/x6q5Ze0orzvC2BmCw75GhJl4quZEG2Pou72PQD2IAiQSUOWYSHcJC/3oyYqtLx6Vl98F9Qjx+6oKZHXqokkWccf2vOyl6ApQ5BKubfUPVSa9ggl87ZdffNueifs60HAIHKtD77NyV4G3vXfKBxbm5Z9AqVLbPp6yXS9AAw==', 
+                                     QueueTimeOutURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU',
+                                     ResultURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', AccountReference='Test')
+```
 ##### Account Balance Request
-    res_json = mpesa.balance(CommandID='AccountBalance', PartyA=partyA, IdentifierType=4, Remarks=remarks, Initiator=initiator, SecurityCredential=security_credential, QueueTimeOutURL=timeout_url, ResultURL=result_url)
-
+```python
+res_json = mpesa.balance(PartyA='600462', IdentifierType=4, Remarks='Okay', Initiator='testapi', 
+                         SecurityCredential='nR47eKS3OWCwOGJofwW4Vze5Y2r9VtiNF+YrxopbnxjRckpZHDp379XscBqPLibV6ZKhQ0OjUFRTR7cVnxLrhF4PDZr8Eg4+euuYL/HB9DQHom0kuDwvxUS+ctQsRZ8gBB8d+QYBqb1hzsBuxl2jNohQpeqVOZ1tb1UzGPnLQfAcQuf/x6q5Ze0orzvC2BmCw75GhJl4quZEG2Pou72PQD2IAiQSUOWYSHcJC/3oyYqtLx6Vl98F9Qjx+6oKZHXqokkWccf2vOyl6ApQ5BKubfUPVSa9ggl87ZdffNueifs60HAIHKtD77NyV4G3vXfKBxbm5Z9AqVLbPp6yXS9AAw==', 
+                         QueueTimeOutURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU',
+                         ResultURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU')
+```
 ##### Transaction Status Request
 
 ##### Reversal Request
