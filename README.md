@@ -42,19 +42,19 @@ mpesa = Mpesa(env, short_code, Consumer Key, Consumer Secret)
 ##### C2B API
 Register urls:
 
-        m.c2b_register_url(ValidationURL=validation_url, ConfirmationURL=confirmation_url)
+        res_json = mpesa.c2b_register_url(ValidationURL=validation_url, ConfirmationURL=confirmation_url)
 Simulate Transaction:
 
-        m.c2b_simulate(CommandID='CustomerPayBillOnline', Amount=amount, MSISDN=phone_no, BillRefNumber=account_no)
+        res_json = mpesa.c2b_simulate(CommandID='CustomerPayBillOnline', Amount=amount, MSISDN=phone_no, BillRefNumber=account_no)
 
 ##### B2C Payment Request
-    m.b2c_payment_request(InitiatorName=initiator_name, SecurityCredential=security_credential, CommandID='BusinessPayment', Amount=amount, PartyA=short_code, PartyB=partyB, Remarks=remarks, QueueTimeOutURL=timeout_url, ResultURL=result_url, Occassion=ocassion)
+    res_json = mpesa.b2c_payment_request(InitiatorName=initiator_name, SecurityCredential=security_credential, CommandID='BusinessPayment', Amount=amount, PartyA=short_code, PartyB=partyB, Remarks=remarks, QueueTimeOutURL=timeout_url, ResultURL=result_url, Occassion=ocassion)
 
 ##### B2B Payment Request
-    m.b2b_payment_request(CommandID='BusinessPayBill', Amount=amount, PartyA=partyA, SenderIdentifier=4, PartyB=short_code, RecieverIdentifierType=4, Remarks=remarks, Initiator=initiator, SecurityCredential=security_credential, QueueTimeOutURL=timeout_url, ResultURL=result_url, AccountReference=acc_ref)
+    res_json = mpesa.b2b_payment_request(CommandID='BusinessPayBill', Amount=amount, PartyA=partyA, SenderIdentifier=4, PartyB=short_code, RecieverIdentifierType=4, Remarks=remarks, Initiator=initiator, SecurityCredential=security_credential, QueueTimeOutURL=timeout_url, ResultURL=result_url, AccountReference=acc_ref)
 
 ##### Account Balance Request
-    m.balance(CommandID='AccountBalance', PartyA=partyA, IdentifierType=4, Remarks=remarks, Initiator=initiator, SecurityCredential=security_credential, QueueTimeOutURL=timeout_url, ResultURL=result_url)
+    res_json = mpesa.balance(CommandID='AccountBalance', PartyA=partyA, IdentifierType=4, Remarks=remarks, Initiator=initiator, SecurityCredential=security_credential, QueueTimeOutURL=timeout_url, ResultURL=result_url)
 
 ##### Transaction Status Request
 
