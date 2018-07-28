@@ -27,9 +27,11 @@ Getting Started
 
 #### Usage
 Import Mpesa and create object
+```python
+from mpesapy import Mpesa
+mpesa = Mpesa(env, short_code, Consumer Key, Consumer Secret)
 
-    from mpesapy import Mpesa
-    mpesa = Mpesa(env, short_code, Consumer Key, Consumer Secret)
+```
 
 ##### Generate Access Token
     access_token = mpesa.get_access_token()
