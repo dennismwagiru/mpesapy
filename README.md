@@ -29,15 +29,21 @@ Getting Started
 Import Mpesa and create object
 ```python
 from mpesapy import Mpesa
-mpesa = Mpesa(env, short_code, Consumer Key, Consumer Secret)
+mpesa = Mpesa('sandbox', '600462', Consumer Key, Consumer Secret)
 
 ```
 
 ##### Generate Access Token
-    access_token = mpesa.get_access_token()
+```python
+access_token = mpesa.get_access_token()
+```
 
 ##### Lipa Na M-Pesa Online Payment API
-    res_json = mpesa.lipa_na_mpesa_online(BusinessShortCode=short_code, Password=password, Timestamp=timestamp, Amount=amount, PartyA=partyA, PartyB=partyB, PhoneNumber=phone_number, CallBackURL=call_back_url, AccountReference=acc_ref, TransactionDesc=trans_desc)
+```python
+res_json = mpesa.lipa_na_mpesa_online(Password='bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919', Timestamp='20180704203000',
+                                      Amount='10', PartyA='254708374149', PartyB='174379', PhoneNumber='254708374149',
+                                      CallBackURL='https://putsreq.com/C1HAyC3fEEbl2UaEu6lU', AccountReference='Test', TransactionDesc='Test')
+```
 
 ##### C2B API
 Register urls:

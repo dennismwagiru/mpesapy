@@ -108,13 +108,14 @@ class Mpesa:
         return json.loads(res)
 
     def lipa_na_mpesa_online(self, **kwargs):
-        expected_keys = ['Password', 'Timestamp', 'Amount', 'PartyA', 'PartyB', 'PhoneNumber', 'CallBackURL',
+        expected_keys = ['Password', 'Timestamp', 'Amount', 'PartyA', 'PhoneNumber', 'CallBackURL',
                          'AccountReference', 'TransactionDesc']
         payload = self.process_kwargs(expected_keys, kwargs)
         string = self.short_code + payload['Password'] + payload['Timestamp']
         key = base64.b64encode((string).encode("utf-8")).decode("ascii").replace('\n', '')
         payload['Password'] = key
         payload['BusinessShortCode'] = self.short_code
+        payload['PartyB'] = self.short_code
         payload['TransactionType'] = 'CustomerPayBillOnline'
         url = self.get_url('online_checkout')
         access_token = self.get_access_token()
