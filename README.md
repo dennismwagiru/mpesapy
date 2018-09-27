@@ -23,6 +23,7 @@ Getting Started
 
 #### Installation:
 
+    pip install mpesapy
     pip install git+https://github.com/dennismwagiru/mpesapy.git
 
 #### Usage

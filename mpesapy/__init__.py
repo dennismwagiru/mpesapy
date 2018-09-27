@@ -3,6 +3,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 import base64
 
+name = "mpesapy"
+
 """
 mpesapy
 
