@@ -134,6 +134,22 @@ class Mpesa:
         res = requests.post(url=url, json=payload, headers=headers).text
         return json.loads(res)
 
+    def check_transaction_status(self, **kwargs):
+        expected_keys = ['InitiatorName', 'SecurityCredential', 'TransactionID', 'ResultURL', 'QueueTimeOutURL',
+                         'Remarks', 'Occasion']
+        payload = self.process_kwargs(expected_keys, kwargs)
+        payload['CommandID'] = 'TransactionStatusQuery'
+        payload['PartyA'] = self.short_code
+        payload['IdentifierType'] = 1
+        url = self.get_url('transaction_status')
+        access_token = self.get_access_token()
+        headers = {
+            'Authorization': 'Bearer: ' + access_token
+        }
+        res= requests.post(url=url, json=payload, headers=headers).text
+        return json.load(res)
+
+
     @staticmethod
     def process_kwargs(expected_keys, kwargs):
         payload = {}
